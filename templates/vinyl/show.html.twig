@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vinyl{% endblock %}
+
+{% block body %}
+    <h1>Vinyl</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vinyl.id }}</td>
+            </tr>
+            <tr>
+                <th>Mp3</th>
+                <td>{{ vinyl.mp3 }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ vinyl.title }}</td>
+            </tr>
+            <tr>
+                <th>Artiste</th>
+                <td>{{ vinyl.artiste }}</td>
+            </tr>
+            <tr>
+                <th>Annee</th>
+                <td>{{ vinyl.annee }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ vinyl.description }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ vinyl.price }}</td>
+            </tr>
+            <tr>
+                <th>Qte</th>
+                <td>{{ vinyl.qte }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ vinyl.createdAt ? vinyl.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('vinyl_index') }}">back to list</a>
+
+    <a href="{{ path('vinyl_edit', {'id': vinyl.id}) }}">edit</a>
+
+    {{ include('vinyl/_delete_form.html.twig') }}
+{% endblock %}

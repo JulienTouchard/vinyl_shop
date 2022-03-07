@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RechercheController!{% endblock %}
+
+{% block body %}
+<h2>Rechercher un artiste</h2>
+<form action="{{ path('recherche')}}" method="post">
+    <div>
+        <input type="text" name="rechercheArtiste" placeholder="Quel artiste recherchez vous?">
+    </div>
+    <div>
+        <input type="submit" value="rechercher" name="submited">
+    </div>
+</form>
+{# Resultats #}
+{% if results|length > 0 %}
+
+{% for result in results %}
+<div>
+    <div>{{result.title}}</div>
+    <div>par {{result.artiste}}</div>
+</div>
+{% else %}
+<div>Nous n'avons pas trouvé de resultats correspondant à votre recherche.</div>
+{% endfor %}
+{% endif %}
+
+<h2>Rechercher un titre</h2>
+<input type="text" name="rechercheTitle" id="rechercheTitle">
+<div id="resultTitle"></div>
+<script>
+    const ajaxRoute = "{{ path('ajaxTitle') }}";
+    const show = "{{ path('vinyl_show',{id:0}) }}"
+</script>
+<script src="{{ asset('assets/js/ajaxTitle.js') }}" defer></script>
+{% endblock %}

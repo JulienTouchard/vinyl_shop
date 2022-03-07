@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vinyl index{% endblock %}
+
+{% block body %}
+    <h1>Vinyl index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mp3</th>
+                <th>Title</th>
+                <th>Artiste</th>
+                <th>Annee</th>
+                <th>Categorie</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Qte</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vinyl in vinyls %}
+            <tr>
+                <td>{{ vinyl.id }}</td>
+                <td>{{ vinyl.mp3 }}</td>
+                <td>{{ vinyl.title }}</td>
+                <td>{{ vinyl.artiste }}</td>
+                <td>{{ vinyl.annee }}</td>
+                <td>
+                    {# {{ dump(vinyl.categorie) }} #}
+                    {% for value in vinyl.categorie %}
+                       {#  {{ dump(value) }} #}
+                    {{ value.type }}&nbsp;
+                    {% endfor %}
+                </td>
+                <td>{{ vinyl.description }}</td>
+                <td>{{ vinyl.price }}</td>
+                <td>{{ vinyl.qte }}</td>
+                <td>{{ vinyl.createdAt ? vinyl.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('vinyl_show', {'id': vinyl.id}) }}">show</a>
+                    <a href="{{ path('vinyl_edit', {'id': vinyl.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('vinyl_new') }}">Create new</a>
+{% endblock %}
